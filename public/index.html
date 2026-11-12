@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="Fair Split - Split bills fairly, share groups and settle payments easily.">
+
+  <title>Fair Split | Split Bills Easily</title>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon">F</div>
+      <span>Fair <strong>Split.</strong></span>
+    </div>
+
+    <div class="topbar-right">
+      <span class="secure-label">
+        <span class="status-dot"></span>
+        Simple. Fair. Together.
+      </span>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">THE SMARTER WAY TO SPLIT</span>
+
+        <h1>
+          Good times together.<br>
+          <span>Fair bills for everyone.</span>
+        </h1>
+
+        <p>
+          Add your bill, assign items to friends and let Fair Split
+          calculate exactly who owes what.
+        </p>
+
+        <div class="hero-points">
+          <span>✓ AI receipt scanning</span>
+          <span>✓ Individual item splitting</span>
+          <span>✓ Easy settlements</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-card visual-card-main">
+          <span class="visual-label">TOTAL BILL</span>
+          <h2 id="heroTotal">$0.00</h2>
+          <div class="visual-divider"></div>
+          <div class="visual-row">
+            <span>People</span>
+            <strong id="heroPeople">0</strong>
+          </div>
+          <div class="visual-row">
+            <span>Split status</span>
+            <strong class="visual-success">Fairly split ✓</strong>
+          </div>
+        </div>
+
+        <div class="floating-card floating-one">
+          <span>✦</span> AI powered
+        </div>
+
+        <div class="floating-card floating-two">
+          <span>✓</span> No confusion
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN WORKSPACE -->
+
+    <section class="workspace" id="workspace">
+
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">LET'S GET STARTED</span>
+          <h2>Create your bill</h2>
+          <p>Enter the details and assign each item to the people who shared it.</p>
+        </div>
+
+        <span class="step-label">STEP 01 / 03</span>
+      </div>
+
+      <!-- PEOPLE SECTION -->
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div class="panel-icon">👥</div>
+          <div>
+            <h3>Who's sharing the bill?</h3>
+            <p>Add everyone who participated in this bill.</p>
+          </div>
+        </div>
+
+        <div class="add-person-row">
+          <input
+            type="text"
+            id="person"
+            placeholder="Enter friend's name"
+            maxlength="60"
+            autocomplete="off"
+          >
+
+          <button type="button" class="btn btn-primary" id="add">
+            + Add person
+          </button>
+        </div>
+
+        <div id="people" class="people-list">
+          <p class="empty-state">No people added yet.</p>
+        </div>
+
+        <p class="field-hint">
+          Add yourself and all the friends sharing the bill.
+        </p>
+      </section>
+
+      <!-- BILL DETAILS -->
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div class="panel-icon">🧾</div>
+          <div>
+            <h3>Bill details</h3>
+            <p>Tell us about the original payment.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="title">Bill / Group name</label>
+            <input
+              type="text"
+              id="title"
+              placeholder="e.g. Dinner at Cafe"
+              maxlength="100"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="currency">Currency</label>
+            <select id="currency">
+              <option value="INR">INR (₹)</option>
+              <option value="USD">USD ($)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="payer">Who paid the original bill?</label>
+            <select id="payer">
+              <option value="">Add people first</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="upiId">Your UPI ID (optional)</label>
+            <input
+              type="text"
+              id="upiId"
+              placeholder="e.g. name@bank"
+              maxlength="100"
+            >
+          </div>
+
+        </div>
+      </section>
+
+      <!-- RECEIPT AI SECTION -->
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div class="panel-icon">✨</div>
+          <div>
+            <h3>Scan your receipt with AI</h3>
+            <p>Upload a receipt or enter its text to extract items automatically.</p>
+          </div>
+        </div>
+
+        <div class="receipt-box">
+          <div class="receipt-upload">
+            <div class="upload-symbol">↑</div>
+
+            <h4>Upload your receipt</h4>
+
+            <p>Choose a clear image of your restaurant bill.</p>
+
+            <label for="receiptFile" class="btn btn-outline upload-label">
+              Choose receipt image
+            </label>
+
+            <input
+              type="file"
+              id="receiptFile"
+              accept="image/png,image/jpeg,image/webp"
+              hidden
+            >
+
+            <p id="fileName" class="file-name">No file selected</p>
+          </div>
+
+          <div class="receipt-separator">
+            <span>OR</span>
+          </div>
+
+          <div class="receipt-text-area">
+            <label for="receiptText">Paste receipt text</label>
+
+            <textarea
+              id="receiptText"
+              rows="5"
+              placeholder="Example:&#10;Pizza - 250&#10;Burger - 180&#10;Cold Coffee - 120"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="ai-actions">
+          <button type="button" class="btn btn-primary" id="ai">
+            ✨ Extract items with AI
+          </button>
+
+          <span id="aiStatus" class="status-message" aria-live="polite"></span>
+        </div>
+      </section>
+      <!-- ITEMS SECTION -->
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div class="panel-icon">🍽️</div>
+          <div>
+            <h3>Bill items & assignments</h3>
+            <p>Add items and select who consumed each one.</p>
+          </div>
+        </div>
+
+        <div class="item-input-grid">
+          <div class="form-group">
+            <label for="itemName">Item name</label>
+            <input
+              type="text"
+              id="itemName"
+              placeholder="e.g. Margherita Pizza"
+              maxlength="100"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="itemAmount">Amount</label>
+            <input
+              type="number"
+              id="itemAmount"
+              placeholder="0.00"
+              min="0.01"
+              step="0.01"
+            >
+          </div>
+
+          <button type="button" class="btn btn-primary" id="addItem">
+            + Add item
+          </button>
+        </div>
+
+        <div id="items" class="items-list">
+          <p class="empty-state">No items added yet. Scan a receipt or add items manually.</p>
+        </div>
+
+        <div class="field-hint">
+          Select every person who consumed an item. Its cost will be divided equally among those selected.
+        </div>
+      </section>
+
+      <!-- EXTRA CHARGES -->
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div class="panel-icon">➕</div>
+          <div>
+            <h3>Extra charges</h3>
+            <p>Add taxes, service charges or other additional expenses.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="extraAmount">Additional amount</label>
+            <input
+              type="number"
+              id="extraAmount"
+              min="0"
+              step="0.01"
+              value="0"
+              placeholder="0.00"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="extraMode">Split extra charges</label>
+            <select id="extraMode">
+              <option value="equal">Equally among everyone</option>
+              <option value="proportional">Based on individual item shares</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- CALCULATION SUMMARY -->
+
+      <section class="summary-panel">
+        <div class="summary-heading">
+          <div>
+            <span class="eyebrow">YOUR BILL SUMMARY</span>
+            <h3>Ready to split?</h3>
+          </div>
+
+          <span class="summary-icon">✦</span>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-item">
+            <span>Total bill</span>
+            <strong id="total">₹0.00</strong>
+          </div>
+
+          <div class="summary-item">
+            <span>People</span>
+            <strong id="count">0</strong>
+          </div>
+
+          <div class="summary-item">
+            <span>Average share</span>
+            <strong id="each">₹0.00</strong>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-primary btn-large" id="calc">
+          Calculate fair shares →
+        </button>
+
+        <p id="error" class="error-message" aria-live="polite"></p>
+      </section>
+
+      <!-- CALCULATED RESULTS -->
+
+      <section id="results" class="results-section" hidden>
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">YOUR SPLIT IS READY</span>
+            <h2>Individual breakdown</h2>
+            <p>Here's how much everyone owes based on their consumption.</p>
+          </div>
+
+          <span class="step-label">STEP 02 / 03</span>
+        </div>
+
+        <div id="shares" class="shares-grid"></div>
+
+        <div class="settlement-card">
+          <div class="panel-heading">
+            <div class="panel-icon">💸</div>
+            <div>
+              <h3>Who owes whom?</h3>
+              <p>Members can reimburse the person who paid the original bill.</p>
+            </div>
+          </div>
+
+          <div id="payments" class="payments-list"></div>
+        </div>
+
+        <!-- GROUP CREATION -->
+
+        <div class="create-group-card">
+          <div class="create-group-content">
+            <span class="eyebrow">STEP 03 / 03</span>
+            <h3>Ready to share the bill?</h3>
+
+            <p>
+              Create your shared group to generate a QR code and link.
+              Your friends can open it, select their names and settle their shares.
+            </p>
+
+            <button type="button" class="btn btn-primary btn-large" id="createGroup">
+              Create group & generate QR →
+            </button>
+
+            <p id="groupStatus" class="status-message" aria-live="polite"></p>
+          </div>
+        </div>
+
+      </section>
+
+    </section>
+
+    <!-- SHARED GROUP VIEW -->
+
+    <section id="groupView" class="group-section" hidden>
+
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">YOUR SHARED BILL</span>
+          <h2 id="groupTitle">Group settlement</h2>
+          <p id="groupSubtitle">View your share and payment status.</p>
+        </div>
+
+        <span class="step-label">FAIR SPLIT</span>
+      </div>
+
+      <!-- GROUP SUMMARY -->
+
+      <div class="group-summary-card">
+        <div>
+          <span>Total bill</span>
+          <strong id="groupTotal">₹0.00</strong>
+        </div>
+
+        <div>
+          <span>Members</span>
+          <strong id="groupCount">0</strong>
+        </div>
+
+        <div>
+          <span>Creator</span>
+          <strong id="groupCreator">-</strong>
+        </div>
+      </div>
+
+      <!-- MEMBER SELECTION -->
+
+      <div class="panel" id="memberSelectPanel">
+        <div class="panel-heading">
+          <div class="panel-icon">👤</div>
+          <div>
+            <h3>Who are you?</h3>
+            <p>Select your name to view your individual share.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="memberSelect">Choose your name</label>
+          <select id="memberSelect">
+            <option value="">Select your name</option>
+          </select>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="viewMember">
+          View my share →
+        </button>
+      </div>
+
+      <!-- MEMBER PAYMENT DETAILS -->
+
+      <div id="memberPayment" class="member-payment-card" hidden>
+        <div class="member-payment-heading">
+          <span class="eyebrow">YOUR SHARE</span>
+          <h3 id="memberName">Hello!</h3>
+          <strong id="memberDue">₹0.00</strong>
+          <p id="memberPaymentStatus">Payment pending</p>
+        </div>
+
+        <div class="member-payment-details">
+          <div>
+            <span>Your total share</span>
+            <strong id="memberShare">₹0.00</strong>
+          </div>
+
+          <div>
+            <span>Already paid</span>
+            <strong id="memberPaid">₹0.00</strong>
+          </div>
+
+          <div>
+            <span>Remaining amount</span>
+            <strong id="memberRemaining">₹0.00</strong>
+          </div>
+        </div>
+
+        <div class="payment-methods" id="paymentMethods">
+          <h4>Settle your share</h4>
+
+          <div id="upiPayment" class="upi-payment">
+            <p>Pay the creator using their UPI ID:</p>
+            <strong id="creatorUpi">Not provided</strong>
+
+            <button type="button" class="btn btn-outline" id="copyUpi">
+              Copy UPI ID
+            </button>
+
+            <button type="button" class="btn btn-outline" id="reportUpi">
+              I've paid using UPI
+            </button>
+          </div>
+
+          <div id="paypalPayment" class="paypal-payment">
+            <p>Pay securely using PayPal Sandbox.</p>
+            <div id="paypalButtons"></div>
+          </div>
+
+          <p id="memberPaymentMessage" class="status-message" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <!-- CREATOR DASHBOARD -->
+
+      <div id="creatorDashboard" class="creator-dashboard" hidden>
+
+        <div class="dashboard-heading">
+          <div>
+            <span class="eyebrow">GROUP OWNER VIEW</span>
+            <h3>Settlement dashboard</h3>
+            <p>Track every member's payment and confirm manual payments.</p>
+          </div>
+
+          <span class="dashboard-icon">📊</span>
+        </div>
+
+        <div class="dashboard-stats">
+          <div class="stat-card">
+            <span>Collected</span>
+            <strong id="collectedAmount">₹0.00</strong>
+          </div>
+
+          <div class="stat-card">
+            <span>Pending</span>
+            <strong id="pendingAmount">₹0.00</strong>
+          </div>
+
+          <div class="stat-card">
+            <span>Paid members</span>
+            <strong id="paidCount">0</strong>
+          </div>
+        </div>
+
+        <div class="member-orders" id="memberOrders">
+          <p class="empty-state">No settlement records yet.</p>
+        </div>
+
+        <div class="share-group-card">
+          <h4>Share your group</h4>
+          <p>Let your friends scan the QR code or open the group link.</p>
+
+          <div class="qr-wrapper">
+            <img id="groupQR" src="" alt="Fair Split group QR code">
+          </div>
+
+          <div class="share-link-row">
+            <input
+              type="text"
+              id="groupLink"
+              readonly
+              aria-label="Group sharing link"
+            >
+
+            <button type="button" class="btn btn-primary" id="copyLink">
+              Copy link
+            </button>
+          </div>
+
+          <button type="button" class="btn btn-outline" id="shareLink">
+            Share group
+          </button>
+        </div>
+
+      </div>
+
+      <p id="groupError" class="error-message" aria-live="polite"></p>
+
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="brand footer-brand">
+      <div class="brand-icon">F</div>
+      <span>Fair <strong>Split.</strong></span>
+    </div>
+
+    <p>Making gatherings more about fun and less about payment arguments.</p>
+    <span>© 2026 Fair Split. Built with fairness in mind.</span>
+  </footer>
+</body>
+</html>
+<script src="app.js"></script>
+</body>
+</html>
